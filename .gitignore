@@ -1,0 +1,21 @@
+# Ignore IntelliJ IDEA files
+.idea/
+
+# Ignore build files
+build/
+
+# Ignore Gradle project-specific cache directory
+.gradle/**
+settings.gradle
+
+# Ignore Gradle build output directory
+build
+
+# Ignore out folder
+out/
+
+# Ignore Idea project specific directory
+.idea
+.DS_Store
+.gitattributes
+
