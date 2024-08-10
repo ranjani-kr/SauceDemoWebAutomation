@@ -6,10 +6,15 @@ build/
 
 # Ignore Gradle project-specific cache directory
 .gradle/**
+
+# Ignore Gradle wrapper files
+gradle/
+gradlew
+gradlew.bat
 settings.gradle
 
 # Ignore Gradle build output directory
-build
+build/
 
 # Ignore out folder
 out/
@@ -19,3 +24,5 @@ out/
 .DS_Store
 .gitattributes
 
+# Ignore macOS files
+*.DS_Store
