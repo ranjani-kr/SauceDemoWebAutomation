@@ -1,9 +1,7 @@
 package org.example.tests.e2e;
 
 import org.example.drivers.DriverCreator;
-import org.example.pages.CartPage;
-import org.example.pages.HomePage;
-import org.example.pages.LauncherPage;
+import org.example.pages.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -16,6 +14,9 @@ public class BuyAProductTest {
     String standardUser= "standard_user";
     String pw = "secret_sauce";
     String lowToHigh = "Price (low to high)";
+    String fn = "Rachel";
+    String ln = "Green";
+    String postCode = "2134";
 
     @BeforeTest
     public void setUp() {
@@ -49,6 +50,12 @@ public class BuyAProductTest {
         CartPage cartPage = homePage.clickOnCartIcon();
         Assert.assertTrue(cartPage.isProductInCart(product1), "Product " + product1 + " is not found in the cart.");
         Assert.assertTrue(cartPage.isProductInCart(product2), "Product " + product2 + " is not found in the cart.");
+        CheckoutYourInformationPage checkoutYourInformationPage = cartPage.clickOnCheckoutButton();
+        Thread.sleep(3000);
+        checkoutYourInformationPage.enterCheckoutInformation(fn,ln,postCode);
+        Thread.sleep(3000);
+        CheckOutOverViewPage checkOutOverViewPage = checkoutYourInformationPage.clickOnContinueButton();
+
         
     }
 }

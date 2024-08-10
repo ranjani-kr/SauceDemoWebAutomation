@@ -10,6 +10,7 @@ public class CartPage {
     WebDriver webDriver;
     By cartItemsLocator = By.cssSelector(".cart_list .cart_item");
     By productNameLocator = By.className("inventory_item_name");
+    By checkoutButton = By.id("checkout");
     public CartPage(WebDriver webDriver){
         this.webDriver = webDriver;
     }
@@ -24,5 +25,10 @@ public class CartPage {
             }
         }
         return false;
+    }
+
+    public CheckoutYourInformationPage clickOnCheckoutButton(){
+        webDriver.findElement(checkoutButton).click();
+        return new CheckoutYourInformationPage(webDriver);
     }
 }
