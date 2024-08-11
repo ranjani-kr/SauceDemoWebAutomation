@@ -82,8 +82,13 @@ public class BuyAProductTest {
         Assert.assertEquals(checkOutOverViewPage.getItemTotal(), "Item total: $17.98", "Item total does not match.");
         Assert.assertEquals(checkOutOverViewPage.getTax(), "Tax: $1.44", "Tax does not match.");
         Assert.assertEquals(checkOutOverViewPage.getTotalPrice(), "Total: $19.42", "Total price does not match.");
-    }
 
-        
+        //Verify the order confirmation page title and order confirmation message
+        CheckoutCompletePage checkoutCompletePage = checkOutOverViewPage.clickOnFinishButton();
+        Assert.assertEquals(checkoutCompletePage.getTitle(), "Checkout: Complete!");
+        Assert.assertEquals(checkoutCompletePage.getOrderConfirmationMessage(), "Thank you for your order!");
+
+
+    }
 
 }

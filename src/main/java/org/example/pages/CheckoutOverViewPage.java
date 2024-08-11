@@ -74,8 +74,8 @@ public class CheckoutOverViewPage {
     public String getTotalPrice() {
         return webDriver.findElement(totalLabel).getText();
     }
-
-    public void clickOnFinishButton(){
+    public CheckoutCompletePage clickOnFinishButton(){
         webDriver.findElement(finishButton).click();
+        return new CheckoutCompletePage(webDriver);
     }
 }
