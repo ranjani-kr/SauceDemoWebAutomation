@@ -25,8 +25,8 @@ public class CheckoutYourInformationPage {
         webDriver.findElement(postalCode).sendKeys(customer.getPostCode());
     }
 
-    public  CheckOutOverViewPage clickOnContinueButton(){
+    public CheckoutOverViewPage clickOnContinueButton(){
         webDriver.findElement(continueButton).click();
-        return new CheckOutOverViewPage(webDriver);
+        return new CheckoutOverViewPage(webDriver);
     }
 }

@@ -1,0 +1,81 @@
+package org.example.pages;
+
+import org.example.models.Product;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CheckoutOverViewPage {
+
+    WebDriver webDriver;
+    By checkoutPageTitle = By.className("title");
+
+    // Locators for product verification
+    By cartItemsLocator = By.cssSelector(".cart_list .cart_item");
+    By productName = By.className("inventory_item_name");
+    By productDesc = By.className("inventory_item_desc");
+    By productPrice = By.className("inventory_item_price");
+
+
+    // Locators for summary labels and values
+    By paymentInfoLabel = By.cssSelector("div[data-test='payment-info-value']");
+    By shippingInfoLabel = By.cssSelector("div[data-test='shipping-info-value']");
+    By itemTotalLabel = By.cssSelector("div[data-test='subtotal-label']");
+    By taxLabel = By.cssSelector("div[data-test='tax-label']");
+    By totalLabel = By.cssSelector("div[data-test='total-label']");
+    By finishButton = By.id("finish");
+
+    public CheckoutOverViewPage(WebDriver webDriver) {
+        this.webDriver = webDriver;
+    }
+
+    public String getPageTitle() {
+        return webDriver.findElement(checkoutPageTitle).getText();
+    }
+
+    public List<Product> getProductList() {
+        List<WebElement> cartItems = webDriver.findElements(cartItemsLocator);
+        List<Product> products = new ArrayList<>();
+
+        for (WebElement item : cartItems) {
+            String name = item.findElement(productName).getText();
+            String description = item.findElement(productDesc).getText();
+            String price = item.findElement(productPrice).getText();
+
+            Product product = Product.builder()
+                    .name(name)
+                    .description(description)
+                    .price(price)
+                    .build();
+
+            products.add(product);
+        }
+        return products;
+    }
+    public String getPaymentInformation() {
+        return webDriver.findElement(paymentInfoLabel).getText();
+    }
+
+    // Method to verify the shipping information
+    public String getShippingInformation() {
+        return webDriver.findElement(shippingInfoLabel).getText();
+    }
+    public String getItemTotal() {
+        return webDriver.findElement(itemTotalLabel).getText();
+    }
+
+    public String getTax() {
+        return webDriver.findElement(taxLabel).getText();
+    }
+
+    public String getTotalPrice() {
+        return webDriver.findElement(totalLabel).getText();
+    }
+
+    public void clickOnFinishButton(){
+        webDriver.findElement(finishButton).click();
+    }
+}

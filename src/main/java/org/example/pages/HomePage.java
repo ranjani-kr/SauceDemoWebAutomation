@@ -2,6 +2,8 @@ package org.example.pages;
 
 import java.time.Duration;
 import java.util.List;
+
+import org.example.models.Product;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,7 +21,10 @@ public class HomePage {
     By productList = By.xpath("//div[@class='inventory_list']/div");
     By addToCartButtonLocator = By.cssSelector("button[id^='add-to-cart']");
     By shoppingCartBadge = By.className("shopping_cart_badge");
-    By productTitleLocator = By.className("inventory_item_name");
+    By productName = By.className("inventory_item_name");
+    By productDescription = By.className("inventory_item_desc");
+    By productAmount = By.className("inventory_item_price");
+
     public HomePage(WebDriver webDriver){
         this.webDriver = webDriver;
     }
@@ -31,16 +36,23 @@ public class HomePage {
     public List<WebElement> getProductLists() {
         return webDriver.findElements(productList);
     }
-    public String addItemToCartByIndex(int index) {
+    public Product addItemToCartByIndex(int index) {
         List<WebElement> productList = getProductLists();
         if (index >= 0 && index < productList.size()) {
             WebElement item = productList.get(index);
             // Get the title of the product
-            String productTitle = item.findElement(productTitleLocator).getText();
+            String productTitle = item.findElement(productName).getText();
+            String productDes = item.findElement(productDescription).getText();
+
+            String productPrice = item.findElement(productAmount).getText().replace("\n", "").trim(); ;
             // Click the "Add to Cart" button
             WebElement addToCartButton = item.findElement(addToCartButtonLocator);
             addToCartButton.click();
-            return productTitle;
+            return Product.builder()
+                    .name(productTitle)
+                    .description(productDes)
+                    .price(productPrice)
+                    .build();
         }
         else {
             System.out.println("Invalid index: " + index);
