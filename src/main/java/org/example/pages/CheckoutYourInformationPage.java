@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import org.example.models.Customer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -15,13 +16,13 @@ public class CheckoutYourInformationPage {
         this.webDriver = webDriver;
     }
 
-    public void enterCheckoutInformation(String fn,String ln, String postCode){
+    public void enterCheckoutInformation(Customer customer){
         webDriver.findElement(firstName).click();
-        webDriver.findElement(firstName).sendKeys(fn);
+        webDriver.findElement(firstName).sendKeys(customer.getFirstname());
         webDriver.findElement(lastName).click();
-        webDriver.findElement(lastName).sendKeys(ln);
+        webDriver.findElement(lastName).sendKeys(customer.getLastname());
         webDriver.findElement(postalCode).click();
-        webDriver.findElement(postalCode).sendKeys(postCode);
+        webDriver.findElement(postalCode).sendKeys(customer.getPostCode());
     }
 
     public  CheckOutOverViewPage clickOnContinueButton(){

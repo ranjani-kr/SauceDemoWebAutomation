@@ -1,6 +1,7 @@
 package org.example.tests.e2e;
 
 import org.example.drivers.DriverCreator;
+import org.example.models.Customer;
 import org.example.pages.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -14,9 +15,9 @@ public class BuyAProductTest {
     String standardUser= "standard_user";
     String pw = "secret_sauce";
     String lowToHigh = "Price (low to high)";
-    String fn = "Rachel";
-    String ln = "Green";
-    String postCode = "2134";
+//    String fn = "Rachel";
+//    String ln = "Green";
+//    String postCode = "2134";
 
     @BeforeTest
     public void setUp() {
@@ -30,6 +31,8 @@ public class BuyAProductTest {
 
     @Test
     public void sortByLowToHighAndBuyFirstTwoProductFromTheList() throws InterruptedException {
+
+        Customer customerInfo = new Customer().init();
         LauncherPage launcherPage = new LauncherPage(webDriver);
         launcherPage.navigateTo("https://www.saucedemo.com/");
         launcherPage.enterLoginDetails(standardUser,pw);
@@ -40,9 +43,9 @@ public class BuyAProductTest {
         homePage.chooseFilterValue(lowToHigh);
         String selectedFilterValue = homePage.getFilterSelectedValue();
         Assert.assertEquals(selectedFilterValue,lowToHigh);
-        String product1 = homePage.addItemToCartByIndex(1);
+        String product1 = homePage.addItemToCartByIndex(0);
         System.out.println("Product added to cart: " + product1);
-        String product2 = homePage.addItemToCartByIndex(2);
+        String product2 = homePage.addItemToCartByIndex(1);
         System.out.println("Product added to cart: " + product2);
         Thread.sleep(3000);
         String badgeNumber = homePage.getBadgeValue();
@@ -52,7 +55,7 @@ public class BuyAProductTest {
         Assert.assertTrue(cartPage.isProductInCart(product2), "Product " + product2 + " is not found in the cart.");
         CheckoutYourInformationPage checkoutYourInformationPage = cartPage.clickOnCheckoutButton();
         Thread.sleep(3000);
-        checkoutYourInformationPage.enterCheckoutInformation(fn,ln,postCode);
+        checkoutYourInformationPage.enterCheckoutInformation(customerInfo);
         Thread.sleep(3000);
         CheckOutOverViewPage checkOutOverViewPage = checkoutYourInformationPage.clickOnContinueButton();
 
