@@ -4,18 +4,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class CheckoutCompletePage {
-    WebDriver webDriver;
+    private final WebDriver webDriver;
+    private final By title = By.className("title");
+    private final By orderConfirmationMessage = By.className("complete-header");
 
-    By title = By.className("title");
-    By orderConfirmationMessage = By.className("complete-header");
     public CheckoutCompletePage(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
-    public String getTitle(){
-      return  webDriver.findElement(title).getText();
-    }
-    public String getOrderConfirmationMessage(){
-        return  webDriver.findElement(orderConfirmationMessage).getText();
+
+    public String getTitle() {
+        return webDriver.findElement(title).getText();
     }
 
+    public String getOrderConfirmationMessage() {
+        return webDriver.findElement(orderConfirmationMessage).getText();
+    }
 }

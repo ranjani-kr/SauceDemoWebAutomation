@@ -10,23 +10,23 @@ import java.util.List;
 
 public class CheckoutOverViewPage {
 
-    WebDriver webDriver;
-    By checkoutPageTitle = By.className("title");
+    private final WebDriver webDriver;
 
+    private final By checkoutPageTitle = By.className("title");
     // Locators for product verification
-    By cartItemsLocator = By.cssSelector(".cart_list .cart_item");
-    By productName = By.className("inventory_item_name");
-    By productDesc = By.className("inventory_item_desc");
-    By productPrice = By.className("inventory_item_price");
+    private final By cartItemsLocator = By.cssSelector(".cart_list .cart_item");
+    private final By productName = By.className("inventory_item_name");
+    private final By productDesc = By.className("inventory_item_desc");
+    private final By productPrice = By.className("inventory_item_price");
 
 
     // Locators for summary labels and values
-    By paymentInfoLabel = By.cssSelector("div[data-test='payment-info-value']");
-    By shippingInfoLabel = By.cssSelector("div[data-test='shipping-info-value']");
-    By itemTotalLabel = By.cssSelector("div[data-test='subtotal-label']");
-    By taxLabel = By.cssSelector("div[data-test='tax-label']");
-    By totalLabel = By.cssSelector("div[data-test='total-label']");
-    By finishButton = By.id("finish");
+    private final By paymentInfoLabel = By.cssSelector("div[data-test='payment-info-value']");
+    private final By shippingInfoLabel = By.cssSelector("div[data-test='shipping-info-value']");
+    private final By itemTotalLabel = By.cssSelector("div[data-test='subtotal-label']");
+    private final By taxLabel = By.cssSelector("div[data-test='tax-label']");
+    private final By totalLabel = By.cssSelector("div[data-test='total-label']");
+    private final By finishButton = By.id("finish");
 
     public CheckoutOverViewPage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -63,6 +63,7 @@ public class CheckoutOverViewPage {
     public String getShippingInformation() {
         return webDriver.findElement(shippingInfoLabel).getText();
     }
+
     public String getItemTotal() {
         return webDriver.findElement(itemTotalLabel).getText();
     }
@@ -74,6 +75,7 @@ public class CheckoutOverViewPage {
     public String getTotalPrice() {
         return webDriver.findElement(totalLabel).getText();
     }
+
     public CheckoutCompletePage clickOnFinishButton(){
         webDriver.findElement(finishButton).click();
         return new CheckoutCompletePage(webDriver);
